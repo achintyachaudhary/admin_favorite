@@ -37,10 +37,10 @@ def get_district(request):
     favorites = models.Favorite.objects.all()
     for favorite in favorites:
         table_body += f"""        
-        <tbody>
+        <tbody class="favoriteSelectorss">
             <tr>
                 <th scope="row"><a href="/{settings.ADMIN_PATH}/{favorite.model.app_label}/{favorite.model.name}/">{favorite.model.name.capitalize()}</a></th>
-                <td><a href="#" onclick="trolled( '{favorite.model.app_label}', '{favorite.model.name}' )" class="viewlink">Not Favorite</a></td>
+                <td><a href="#" onclick="trolled( '{favorite.model.app_label}', '{favorite.model.name}', this )" class="viewlink">Not Favorite</a></td>
             </tr>
         </tbody>"""
     table = table + table_body + "</table>"
@@ -54,8 +54,8 @@ from django.views.decorators.csrf import csrf_exempt
 def unfavorite(request):
     print('here')
     body = request.POST
-    label = body['label']
-    name = body['name']
+    label = body['label'].replace(' ', '')
+    name = body['name'].replace(' ', '')
     model = ContentType.objects.filter(app_label=label, model=name).first()
     models.Favorite.objects.filter(model=model).delete()
     return HttpResponse("post request success")

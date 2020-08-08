@@ -1,15 +1,16 @@
 {% load static %}
 <script src="{% static 'js/jquery.js' %} "></script>
 <script>
-    function trolled(lol, jhol) {
-        console.log('vahi vala');
+    function trolled(lol, jhol, thiss) {
+        console.log('vahi vala', lol, jhol);
         $.ajax({
             url: 'unfavorite',
             type: 'POST',
             data: {'label': lol, 'name': jhol},
             dataType: 'json',
         });
-        console.log('endddddd')
+
+        console.log($(thiss).parentsUntil(".favoriteSelectorss").remove())
     }
 
     $(document).ready(function () {
