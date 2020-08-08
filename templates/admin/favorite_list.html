@@ -1,6 +1,17 @@
 {% load static %}
 <script src="{% static 'js/jquery.js' %} "></script>
 <script>
+    function trolled(lol, jhol) {
+        console.log('vahi vala');
+        $.ajax({
+            url: 'unfavorite',
+            type: 'POST',
+            data: {'label': lol, 'name': jhol},
+            dataType: 'json',
+        });
+        console.log('endddddd')
+    }
+
     $(document).ready(function () {
         $.ajax({
             url: "favorite",
@@ -10,6 +21,8 @@
             }
         });
     });
+
+
 </script>
 <div id="favorite_app" class="app-admin_favorite module">
 </div>

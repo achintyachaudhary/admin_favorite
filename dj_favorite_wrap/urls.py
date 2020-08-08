@@ -14,12 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.http import JsonResponse
+from django.contrib.contenttypes.models import ContentType
+from django.http import JsonResponse, HttpResponse
 from django.urls import path
 from django.conf import settings
+from admin_favorite import models
+
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def get_district(request):
+    print('eeeeeeeeeeeeeeeeeeee')
     table = f"""<table>
         <caption style="background-color:#11ba8a">
           <div  title="Favorite apps used frequently">{settings.ADMIN_FAVORITE}</div>
@@ -28,20 +34,35 @@ def get_district(request):
     #   <a href="/{settings.ADMIN_PATH}/admin_favorite/" class="section" title="Models in the lol application">{settings.ADMIN_FAVORITE}</a>
     # </caption>"""
     table_body = ""
-    for iter in range(0, 2):
+    favorites = models.Favorite.objects.all()
+    for favorite in favorites:
         table_body += f"""        
         <tbody>
             <tr>
-                <th scope="row"><a href="/{settings.ADMIN_PATH}/admin_favorite/favorite/">Favorites</a></th>
-                <td><a href="/{settings.ADMIN_PATH}/admin_favorite/favorite/" class="viewlink">Not Favorite</a></td>
+                <th scope="row"><a href="/{settings.ADMIN_PATH}/{favorite.model.app_label}/{favorite.model.name}/">{favorite.model.name.capitalize()}</a></th>
+                <td><a href="#" onclick="trolled( '{favorite.model.app_label}', '{favorite.model.name}' )" class="viewlink">Not Favorite</a></td>
             </tr>
         </tbody>"""
     table = table + table_body + "</table>"
     return JsonResponse({"dist_data": table})
 
 
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def unfavorite(request):
+    print('here')
+    body = request.POST
+    label = body['label']
+    name = body['name']
+    model = ContentType.objects.filter(app_label=label, model=name).first()
+    models.Favorite.objects.filter(model=model).delete()
+    return HttpResponse("post request success")
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/favorite', get_district, name='favorite'),
-
+    path('admin/unfavorite', unfavorite, name='unfavorite'),
 ]
