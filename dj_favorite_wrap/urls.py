@@ -14,47 +14,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.urls import path, re_path
 from django.http import JsonResponse
+from django.urls import path
+from django.conf import settings
 
 
-# Create your views here.
 def get_district(request):
-    """
-    give a state id, returns district mapped to that state
-    :param request: state_id
-    :return:
-    """
-    x = """<table>
-        <caption>
-          <a href="/admin/admin_favorite/" class="section" title="Models in the lol application">lol</a>
-        </caption>
-
-          <tbody><tr class="model-favorite">
-
-              <th scope="row"><a href="/admin/admin_favorite/favorite/">Favorites</a></th>
-
-             <td><a href="/admin/admin_favorite/favorite/" class="viewlink">favorite</a></td>
-
-
-
-          </tr>
-
-      </tbody>
-          <tbody><tr class="model-favorite">
-
-              <th scope="row"><a href="/admin/admin_favorite/favorite/">Favorites</a></th>
-
-             <td><a href="/admin/admin_favorite/favorite/" class="viewlink">favorite</a></td>
-
-
-
-          </tr>
-
-      </tbody>
-      </table>"""
-    return JsonResponse({"dist_data": x})
+    table = f"""<table>
+        <caption style="background-color:#11ba8a">
+          <div  title="Favorite apps used frequently">{settings.ADMIN_FAVORITE}</div>
+        </caption>"""
+    # <caption>
+    #   <a href="/{settings.ADMIN_PATH}/admin_favorite/" class="section" title="Models in the lol application">{settings.ADMIN_FAVORITE}</a>
+    # </caption>"""
+    table_body = ""
+    for iter in range(0, 2):
+        table_body += f"""        
+        <tbody>
+            <tr>
+                <th scope="row"><a href="/{settings.ADMIN_PATH}/admin_favorite/favorite/">Favorites</a></th>
+                <td><a href="/admin/admin_favorite/favorite/" class="viewlink">favorite</a></td>
+            </tr>
+        </tbody>"""
+    table = table + table_body + "</table>"
+    print(table, type(table))
+    return JsonResponse({"dist_data": table})
 
 
 urlpatterns = [

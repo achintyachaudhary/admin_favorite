@@ -122,4 +122,5 @@ STATIC_ROOT = BASE_DIR / 'run' / 'static'
 
 STATIC_URL = '/static/'
 
-ADMIN_FAVORITE = 'lol'
+ADMIN_FAVORITE = 'Favorite'
+ADMIN_PATH = 'admin'

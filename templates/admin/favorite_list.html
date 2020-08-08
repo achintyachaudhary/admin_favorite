@@ -1,15 +1,16 @@
 {% load static %}
 <script src="{% static 'js/jquery.js' %} "></script>
 <script>
-$(document).ready(function(){
-$.ajax({ url: "favorite",
-        context: document.body,
-        success: function(data){
-    $('#myid').append(data.dist_data);
-          console.log(data);
-        }});
-});
+    $(document).ready(function () {
+        $.ajax({
+            url: "favorite",
+            context: document.body,
+            success: function (data) {
+                $('#favorite_app').append(data.dist_data);
+            }
+        });
+    });
 </script>
-<div id="myid" class="app-admin_favorite module">
-    </div>
+<div id="favorite_app" class="app-admin_favorite module">
+</div>
 
