@@ -33,11 +33,10 @@ def get_district(request):
         <tbody>
             <tr>
                 <th scope="row"><a href="/{settings.ADMIN_PATH}/admin_favorite/favorite/">Favorites</a></th>
-                <td><a href="/admin/admin_favorite/favorite/" class="viewlink">favorite</a></td>
+                <td><a href="/{settings.ADMIN_PATH}/admin_favorite/favorite/" class="viewlink">Not Favorite</a></td>
             </tr>
         </tbody>"""
     table = table + table_body + "</table>"
-    print(table, type(table))
     return JsonResponse({"dist_data": table})
 
 

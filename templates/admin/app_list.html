@@ -1,3 +1,11 @@
+{% load static %}
+<script src="{% static 'js/jquery.js' %} "></script>
+<script>
+    function called_me(lol, jhol) {
+    // window.open(lol);
+        console.log(lol, jhol)
+}
+</script>
 {% load i18n %}
 
 {% if app_list %}
@@ -14,7 +22,7 @@
             {% else %}
               <th scope="row">{{ model.name }}</th>
             {% endif %}
-             <td><a href="{{ model.admin_url }}" class="viewlink">favorite</a></td>
+             <td><a href="#" type="{{ model.name|lower }}" rel="{{ app.app_label|lower }}" onclick="called_me( this.rel, this.type )" class="viewlink">favorite</a></td>
             {% if model.add_url %}
               <td><a href="{{ model.add_url }}" class="addlink">{% translate 'Add' %}</a></td>
             {% else %}
