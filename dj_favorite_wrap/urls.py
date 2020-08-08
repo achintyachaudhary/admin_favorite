@@ -15,7 +15,50 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import path, re_path
+from django.http import JsonResponse
+
+
+# Create your views here.
+def get_district(request):
+    """
+    give a state id, returns district mapped to that state
+    :param request: state_id
+    :return:
+    """
+    x = """<table>
+        <caption>
+          <a href="/admin/admin_favorite/" class="section" title="Models in the lol application">lol</a>
+        </caption>
+
+          <tbody><tr class="model-favorite">
+
+              <th scope="row"><a href="/admin/admin_favorite/favorite/">Favorites</a></th>
+
+             <td><a href="/admin/admin_favorite/favorite/" class="viewlink">favorite</a></td>
+
+
+
+          </tr>
+
+      </tbody>
+          <tbody><tr class="model-favorite">
+
+              <th scope="row"><a href="/admin/admin_favorite/favorite/">Favorites</a></th>
+
+             <td><a href="/admin/admin_favorite/favorite/" class="viewlink">favorite</a></td>
+
+
+
+          </tr>
+
+      </tbody>
+      </table>"""
+    return JsonResponse({"dist_data": x})
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin/favorite', get_district, name='favorite'),
+
 ]

@@ -121,3 +121,5 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'run' / 'static'
 
 STATIC_URL = '/static/'
+
+ADMIN_FAVORITE = 'lol'
