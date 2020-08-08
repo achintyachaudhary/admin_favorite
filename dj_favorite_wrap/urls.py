@@ -26,8 +26,8 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def get_district(request):
     print('eeeeeeeeeeeeeeeeeeee')
-    table = f"""<table>
-        <caption style="background-color:#11ba8a">
+    table = f"""<table class="tableclass">
+        <caption style="background-color:#11ba8a" >
           <div  title="Favorite apps used frequently">{settings.ADMIN_FAVORITE}</div>
         </caption>"""
     # <caption>
@@ -37,7 +37,7 @@ def get_district(request):
     favorites = models.Favorite.objects.all()
     for favorite in favorites:
         table_body += f"""        
-        <tbody class="favoriteSelectorss">
+        <tbody class="favoriteSelectorss" id="x">
             <tr>
                 <th scope="row"><a href="/{settings.ADMIN_PATH}/{favorite.model.app_label}/{favorite.model.name}/">{favorite.model.name.capitalize()}</a></th>
                 <td><a href="#" onclick="trolled( '{favorite.model.app_label}', '{favorite.model.name}', this )" class="viewlink">Not Favorite</a></td>
