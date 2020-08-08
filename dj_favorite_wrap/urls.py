@@ -61,8 +61,23 @@ def unfavorite(request):
     return HttpResponse("post request success")
 
 
+@csrf_exempt
+def addfav(request):
+    print('here')
+    body = request.POST
+    label = body['label'].replace(' ', '')
+    name = body['name'].replace(' ', '')
+    model = ContentType.objects.filter(app_label=label, model=name).first()
+    obj, created = models.Favorite.objects.get_or_create(model=model)
+    if not created:
+        obj.delete()
+    return HttpResponse("post request success")
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin/favorite', get_district, name='favorite'),
     path('admin/unfavorite', unfavorite, name='unfavorite'),
+    path('admin/addfav', addfav, name='addfav'),
+
 ]

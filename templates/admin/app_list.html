@@ -2,8 +2,13 @@
 <script src="{% static 'js/jquery.js' %} "></script>
 <script>
     function called_me(lol, jhol) {
-    // window.open(lol);
-        console.log(lol, jhol)
+    console.log('vahi vala', lol, jhol);
+        $.ajax({
+            url: 'addfav',
+            type: 'POST',
+            data: {'label': lol, 'name': jhol},
+            dataType: 'json',
+        });
 }
 </script>
 {% load i18n %}
@@ -22,7 +27,7 @@
             {% else %}
               <th scope="row">{{ model.name }}</th>
             {% endif %}
-             <td><a href="#" type="{{ model.name|lower }}" rel="{{ app.app_label|lower }}" onclick="called_me( this.rel, this.type )" class="viewlink">favorite</a></td>
+             <td><a href="#" type="{{ model.object_name|lower }}" rel="{{ app.app_label|lower }}" onclick="called_me( this.rel, this.type )" class="viewlink">favorite</a></td>
             {% if model.add_url %}
               <td><a href="{{ model.add_url }}" class="addlink">{% translate 'Add' %}</a></td>
             {% else %}
