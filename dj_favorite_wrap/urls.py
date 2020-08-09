@@ -43,7 +43,7 @@ def get_district(request):
             </tr>
         </tbody>"""
     table = table + table_body + "</table>"
-    return JsonResponse({"dist_data": table})
+    return JsonResponse({"dist_data": table, "count":favorites.count()})
 
 
 from django.views.decorators.csrf import csrf_exempt
@@ -57,7 +57,7 @@ def unfavorite(request):
     name = body['name'].replace(' ', '')
     model = ContentType.objects.filter(app_label=label, model=name).first()
     models.Favorite.objects.filter(model=model).delete()
-    return HttpResponse("post request success")
+    return HttpResponse(models.Favorite.objects.all().count())
 
 
 @csrf_exempt

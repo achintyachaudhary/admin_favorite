@@ -15,7 +15,13 @@
                     context: document.body,
                     success: function (datas) {
                         $('#favorite_app').children().remove();
-                        $('#favorite_app').append(datas.dist_data);
+                        if (datas.count != 0 ){
+                            $('#favorite_app').show()
+                            $('#favorite_app').append(datas.dist_data);
+                        }
+                        else {
+                            $('#favorite_app').hide()
+                        }
                     }
                 });
             }
