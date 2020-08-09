@@ -8,22 +8,14 @@
             type: 'POST',
             data: {'label': lol, 'name': jhol},
             dataType: 'json',
-            complete: function () {
-                $.ajax({
-                    url: "favorite",
-                    context: document.body,
-                    success: function (datas) {
-                        if (datas.count == 0) {
-                            $('#favorite_app').hide()
-                        }
-                    }
-                });
-            }
+            success: function (data) {
+                console.log(data, 'cussssssssssssssssssssss');
+                if (data == 0) {
+                    $('#favorite_app').hide()
+                }
+            },
         });
-
         $(thiss).parentsUntil(".favoriteSelectorss").remove()
-
-
     }
 
     $(document).ready(function () {
@@ -31,13 +23,11 @@
             url: "favorite",
             context: document.body,
             success: function (data) {
-                if (data.count !=0){
+                if (data.count != 0) {
                     $('#favorite_app').append(data.dist_data);
-                }
-                else{
+                } else {
                     $('#favorite_app').hide();
                 }
-
             }
         });
     });
