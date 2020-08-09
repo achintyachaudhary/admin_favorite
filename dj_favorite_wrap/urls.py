@@ -25,7 +25,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def get_district(request):
-    print('eeeeeeeeeeeeeeeeeeee')
     table = f"""<table class="tableclass">
         <caption style="background-color:#11ba8a" >
           <div  title="Favorite apps used frequently">{settings.ADMIN_FAVORITE}</div>
@@ -63,7 +62,6 @@ def unfavorite(request):
 
 @csrf_exempt
 def addfav(request):
-    print('here')
     body = request.POST
     label = body['label'].replace(' ', '')
     name = body['name'].replace(' ', '')

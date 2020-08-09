@@ -2,14 +2,25 @@
 <script src="{% static 'js/jquery.js' %} "></script>
 <script>
     function called_me(lol, jhol) {
-    console.log('vahi vala', lol, jhol);
         $.ajax({
             url: 'addfav',
             type: 'POST',
             data: {'label': lol, 'name': jhol},
             dataType: 'json',
+            success: function (data) {
+            },
+            complete: function () {
+                $.ajax({
+                    url: "favorite",
+                    context: document.body,
+                    success: function (datas) {
+                        $('#favorite_app').children().remove();
+                        $('#favorite_app').append(datas.dist_data);
+                    }
+                });
+            }
         });
-}
+    }
 </script>
 {% load i18n %}
 
