@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
+from django.db import IntegrityError
 from django.http import JsonResponse, HttpResponse
 from django.urls import path
 from django.conf import settings
@@ -53,8 +54,8 @@ from django.views.decorators.csrf import csrf_exempt
 def unfavorite(request):
     print('here')
     body = request.POST
-    label = body['label'].replace(' ', '')
-    name = body['name'].replace(' ', '')
+    label = body['label'].replace(' ', '').lower()
+    name = body['name'].replace(' ', '').lower()
     model = ContentType.objects.filter(app_label=label, model=name).first()
     models.Favorite.objects.filter(model=model).delete()
     return HttpResponse(models.Favorite.objects.all().count())
@@ -63,12 +64,15 @@ def unfavorite(request):
 @csrf_exempt
 def addfav(request):
     body = request.POST
-    label = body['label'].replace(' ', '')
-    name = body['name'].replace(' ', '')
-    model = ContentType.objects.filter(app_label=label, model=name).first()
-    obj, created = models.Favorite.objects.get_or_create(model=model)
-    if not created:
-        obj.delete()
+    label = body['label'].replace(' ', '').lower()
+    name = body['name'].replace(' ', '').lower()
+    try:
+        model = ContentType.objects.filter(app_label=label, model=name).first()
+        obj, created = models.Favorite.objects.get_or_create(model=model)
+        if not created:
+            obj.delete()
+    except IntegrityError as err:
+        print(f'Please migrate your model - "{name}" with app name - "{label}" in your admin.py', )
     return HttpResponse("post request success")
 
 

@@ -8,13 +8,14 @@
             data: {'label': lol, 'name': jhol},
             dataType: 'json',
             success: function (data) {
-                console.log(data, 'cussssssssssssssssssssss');
                 if (data == 0) {
                     $('#favorite_app').hide()
+                } else {
+                    $(thiss).parentsUntil(".favoriteSelectorss").remove()
                 }
-            },
+            }
         });
-        $(thiss).parentsUntil(".favoriteSelectorss").remove()
+
     }
 
     $(document).ready(function () {

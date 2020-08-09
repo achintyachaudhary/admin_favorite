@@ -35,7 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'admin_favorite'
+    'admin_favorite',
+    'country',
+    'continent',
+    'tourism'
+
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 PROJECT_ROOT = dirname(BASE_DIR)
