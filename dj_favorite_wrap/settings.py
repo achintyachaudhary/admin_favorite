@@ -119,10 +119,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# look for static assets here
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
 
 # collect static files here
 STATIC_ROOT = BASE_DIR / 'run' / 'static'
