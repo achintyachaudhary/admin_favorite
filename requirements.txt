@@ -1,2 +1,5 @@
 # A high-level Python Web framework
 django==3.1
+
+# WSGI HTTP Server for UNIX
+gunicorn==20.0.4
