@@ -4,4 +4,4 @@ from django.conf import settings
 
 class AdminFavoriteConfig(AppConfig):
     name = 'admin_favorite'
-    verbose_name = settings.ADMIN_FAVORITE
+    verbose_name = settings.ADMIN_FAVORITE if hasattr(settings, 'ADMIN_FAVORITE') else 'Favorite'
