@@ -1,2 +1,2 @@
-.. automodule:: admin_favorite.urls
+.. automodule:: admin_favorite
     :members:
