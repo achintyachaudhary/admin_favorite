@@ -44,7 +44,9 @@
             {% else %}
               <th scope="row">{{ model.name }}</th>
             {% endif %}
-             <td><a href="#" type="{{ model.object_name|lower }}" rel="{{ app.app_label|lower }}" onclick="called_me( this.rel, this.type )" class="viewlink">favorite</a></td>
+             <td><a href="#" type="{{ model.object_name|lower }}" rel="{{ app.app_label|lower }}" onclick="called_me( this.rel, this.type )">
+               <img src="{% static 'images/favorite.svg' %}">
+             </a></td>
             {% if model.add_url %}
               <td><a href="{{ model.add_url }}" class="addlink">{% translate 'Add' %}</a></td>
             {% else %}
