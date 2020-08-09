@@ -1,0 +1,2 @@
+# A high-level Python Web framework
+django==3.1
