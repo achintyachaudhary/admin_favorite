@@ -3,3 +3,6 @@ django==3.1
 
 # WSGI HTTP Server for UNIX
 gunicorn==20.0.4
+
+# Radically simplified static file serving for WSGI applications
+whitenoise==5.2.0
