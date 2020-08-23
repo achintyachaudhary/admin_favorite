@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.http import JsonResponse, HttpResponse
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import RedirectView
 
 from admin_favorite import models
 
@@ -70,4 +71,9 @@ urlpatterns = [
     path('admin/favorite', get_district, name='favorite'),
     path('admin/unfavorite', unfavorite, name='unfavorite'),
     path('admin/addfav', addfav, name='addfav'),
+    path('favicon.ico', RedirectView.as_view(url='/static/images/favorite.svg')),
 ]
+
+admin.site.site_header = 'Admin Favorite Demo'
+admin.site.site_title = 'Admin Favorite'
+admin.site.index_title = 'Admin Favorite Administration'
