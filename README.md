@@ -27,6 +27,6 @@
     
     path('', include('admin_favorite.urls'))
 
-**Step 2 :** migrate admin-favorite app to your project
+**Step 4 :** migrate admin-favorite app to your project
             
      python manage.py migrate
