@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
 from django.db import IntegrityError
 from django.http import JsonResponse, HttpResponse
@@ -8,12 +7,15 @@ from django.views.decorators.csrf import csrf_exempt
 
 from admin_favorite import models
 
+admin_favorite = settings.ADMIN_FAVORITE if hasattr(settings, 'ADMIN_FAVORITE') else 'Favorite'
+admin_path = settings.ADMIN_PATH if hasattr(settings, 'ADMIN_PATH') else 'admin'
+
 
 @csrf_exempt
 def get_district(request):
     table = f"""<table class="tableclass">
         <caption style="background-color:#11ba8a" >
-          <div  title="Favorite apps used frequently">{settings.ADMIN_FAVORITE}</div>
+          <div  title="Favorite apps used frequently">{admin_favorite}</div>
         </caption>"""
     # <caption>
     #   <a href="/{settings.ADMIN_PATH}/admin_favorite/" class="section" title="Models in the lol application">{settings.ADMIN_FAVORITE}</a>
@@ -29,7 +31,7 @@ style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-w
         table_body += f"""        
         <tbody class="favoriteSelectorss" id="x">
             <tr>
-                <th scope="row"><a href="/{settings.ADMIN_PATH}/{favorite.model.app_label}/{favorite.model.name}/">{favorite.model.name.capitalize()}</a></th>
+                <th scope="row"><a href="/{admin_path}/{favorite.model.app_label}/{favorite.model.name}/">{favorite.model.name.capitalize()}</a></th>
                 <td><a href="#" onclick="trolled( '{favorite.model.app_label}', '{favorite.model.name}', this )">{x} </a></td>
             </tr>
         </tbody>"""
