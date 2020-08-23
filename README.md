@@ -3,12 +3,13 @@
 
 **Mark most usable app as favorite in django admin**
 
-https://admin-favorite.herokuapp.com/admin/
-
 **Author :** Achintya Ranjan Chaudhary
 
 **License :** MIT
 
+**Documentation :** https://admin-favorite.readthedocs.io/en/stable/
+
+**Demo :** https://admin-favorite.herokuapp.com/admin/ (username: admin | password: admin)
 
 ----
 
