@@ -1,4 +1,3 @@
-![alt text](https://img.shields.io/website?url=https://admin-favorite.herokuapp.com/admin)
 ![alt text](https://img.shields.io/apm/l/docker)
 
 **Mark most usable app as favorite in django admin**
