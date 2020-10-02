@@ -1,17 +1,17 @@
 {% load static %}
 <script src="{% static 'js/jquery.js' %} "></script>
 <script>
-    function trolled(lol, jhol, thiss) {
+    function trolled(labelProp, nameProp, currObj) {
         $.ajax({
             url: 'unfavorite',
             type: 'POST',
-            data: {'label': lol, 'name': jhol},
+            data: {'label': labelProp, 'name': nameProp},
             dataType: 'json',
             success: function (data) {
                 if (data == 0) {
                     $('#favorite_app').hide()
                 } else {
-                    $(thiss).parentsUntil(".favoriteSelectorss").remove()
+                    $(currObj).parentsUntil(".favoriteSelectorss").remove()
                 }
             }
         });
