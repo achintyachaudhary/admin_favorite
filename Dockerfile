@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 COPY src /app
 
 EXPOSE 8080
-CMD [ "python", "server.py" ]
+CMD [ "python3", "server.py" ]
